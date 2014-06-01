@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Property History</title>
+
+    <!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/main.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+		var map;
+		function initialize() {
+		var mapOptions = {zoom: 15,center: new google.maps.LatLng(29.762354, -95.365586)};
+		map = new google.maps.Map(document.getElementById('map-canvas-history'),mapOptions);}
+		
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+	
+  </head>
+  <body>
+	<div id="wrap">
+		<img src="img/header.jpg" alt="Header Image" class="header-img">
+		<nav class="navbar navbar-inverse" role="navigation">
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <!--<a class="navbar-brand" href="#">Brand</a>-->
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+			<li class="active"><a href="index.html">Home</a></li>
+			<li><a href="#">I want to...</a></li>
+			<li><a href="#">Government</a></li>
+			<li><a href="#">Residents</a></li>
+			<li><a href="#">Business</a></li>
+			<li><a href="#">Departments</a></li>
+			<li><a href="#">Visitors</a></li>
+			<li><a href="#">En Espanol</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="#myModal" data-toggle="modal" data-target="#myModal">How To Use This Site</a></li>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	
+	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <img src="img/header.jpg" class="modal-title">
+      </div>
+      <div class="modal-body">
+        <p>Click on a property to learn more about projects and actions at that property. Pan across the map to view locations in other areas.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+	
+	<a href="#historymodal" data-toggle="modal" data-target="#historymodal"><button type="button" class="btn btn-primary btn-lg btn-block hcad-button">Modal Link</button></a>
+	
+<div class="modal fade bs-example-modal-lg" id="historymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <img src="img/header.jpg" class="modal-title">
+      </div>
+      <div class="modal-body">
+        <div class="container">
+		<div class="row">
+			<div class="overall-container">
+				<div class="map-container-history pull-right">
+					<div id="map-canvas-history"></div>
+					<button type="button" class="btn btn-primary btn-lg btn-block hcad-button">View Property Information on HCAD</button>
+				</div>
+				<div class="history-container pull-left">
+					<H1 class="text-warning"><center>Property History</center></h1>
+					<h3 class="text-warning"><center>1234 Jones Street, Houston, TX 77001</center></h3>
+					<div class="panel panel-default history-panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Case Number</h3>
+						</div>
+						<div class="panel-body">
+							<p><strong>1234-5678-9</strong></p>
+						</div>
+					</div>
+					<div class="panel panel-default history-panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Violations</h3>
+						</div>
+						<div class="panel-body">
+							<p><strong>Sanitation:</strong> all exterior property and premises shall be maintained in a clean, safe and sanitary condition, free from any accumulation of trash, litter, debris, garbage, waste, rubbish or other similar material. every occupant of a structure shall dispose of all rubbish in a clean and sanitary manner by placing such trash in approved container(s), as provided in chapter 138 of the code of the City of Houston.</p>
+							<p><strong>Rodent Harborage:</strong> (a)	all structures and exterior property shall be kept free from rodent harborage and infestation. where rodents are found, they shall be promptly exterminated by approved processes which will not be injurious to human health. after extermination, proper precautions shall be taken to eliminate rodent harborage and prevent re-infestation.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+	
+	<div id="footer">
+      <div class="container">
+		<ul class="nav navbar-nav">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="#">311 Help and Info</a></li>
+			<li><a href="#">En Espanol</a></li>
+			<li><a href="#">Contact Us</a></li>
+			<li><a href="#">FAQs</a></li>
+			<li><a href="#">Privacy Policy</a></li>
+			<li><a href="#">Citizens Net</a></li>
+			<li><a href="#">Login</a></li>	
+		  </ul>
+      </div>
+    </div>
+	
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

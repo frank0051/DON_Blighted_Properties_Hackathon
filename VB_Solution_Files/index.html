@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Houston Hackathon Blight Status</title>
+
+    <!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/main.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+		var map;
+		function initialize() {
+		var mapOptions = {zoom: 10,center: new google.maps.LatLng(29.762354, -95.365586)};
+		map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);}
+		
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+	
+  </head>
+  <body>
+	<div id="wrap">
+		<img src="img/header.jpg" alt="Header Image" class="header-img">
+		<nav class="navbar navbar-inverse" role="navigation">
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <!--<a class="navbar-brand" href="#">Brand</a>-->
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+			<li class="active"><a href="index.html">Home</a></li>
+			<li><a href="#">I want to...</a></li>
+			<li><a href="#">Government</a></li>
+			<li><a href="#">Residents</a></li>
+			<li><a href="#">Business</a></li>
+			<li><a href="#">Departments</a></li>
+			<li><a href="#">Visitors</a></li>
+			<li><a href="#">En Espanol</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="#myModal" data-toggle="modal" data-target="#myModal">About This Site</a></li>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	
+	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <img src="img/header.jpg" class="modal-title">
+      </div>
+      <div class="modal-body">
+        <h3 align="center">About This Site</h3>
+		<p align="center"><a href="http://www.houstontx.gov" target="_blank"><img src="img/houstonblackandbwhite.png" alt="City Seal" width="200" height="202" border="0" /></a> <a href="http://ohouston.org" target="_blank"><img src="img/robot-head.png"alt="Open Houston" /></a></p>
+		<p> </p>
+		<p>The City of Houston Blighted Properties website is an <a href="//ohouston.org" target="_blank">Open Houston</a> project that was conceptualized at a City of Houston sponsored <a href="//houstonhackathon.com" target="_blank">Hackathon</a>.</p>
+		Data presented here is solely for information purposes and shall not be considered accurate, factual, or complete. Download your copy of the Department of Neighborhoods code enforcement violation files at <a href="http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don" target="_blank">http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don</a></p>
+		
+		<h4><center>City of Houston 2nd Annual Open Innovation Hackathon Team Members<br/>May 31 - June 1, 2014</center></h4>
+		<ul>
+			<li>Frank Bracco - City of Houston, Texas</li>
+			<li>Jonathan Farmer - City of Stafford, Texas</li>
+			<li>Reza H. Teshnizi - Texas A&M University</li>
+			<li>Raghuveer Modala - Texas A&M University</li>
+			<li>Elvis Takow - Texas A&M University</li>
+		</ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+	<div class="container">
+		<span class="blight-text"><center>City of Houston Blighted Properties</center></span>
+		<div class="row">
+			<div class="overall-container">
+				<div class="navbar-form">
+				<form role="search">
+				<div class="form-group">
+					<input type="text" class="form-control search-form" placeholder="Enter An Address...">
+				</div>	
+				<a href="http://www.hcad.org/records/recorddetails.asp?taxyear=2014&acct=1158160010016" class="search-btn"><button type="submit" class="btn btn-primary">Search</a></button>
+				</form>
+				</div>
+				<div class="map-container pull-left">
+					<div id="map-canvas"></div>
+				</div>
+				<div class="instructions-container pull-right">
+					<h4>How to use this site:</h4>
+					<p>The Department of Neighborhoods Inspections & Public Service (IPS) enforces <a href="https://library.municode.com/HTML/10123/level2/COOR_CH10BUNEPR.html">Chapter 10</a> of the City of Houston Code of Ordinances. Violations under this section include Open and vacant buildings, nuisances on private property, junk motor vehicles, weeded lots, and graffiti.</p>
+					<p>You use this map to see open code enforcement violations in the City of Houston. You can either use the search bar to center on an address to get started, or you can pan and zoom like you normally would in Google Maps. Once you get down to a propert you want to learn more about, click on the marker to see the property history.</p>
+					<a href="#historymodal" data-toggle="modal" data-target="#historymodal"><button type="button" class="btn btn-primary btn-lg btn-block">Modal Link</button></a>
+	
+<div class="modal fade bs-example-modal-lg" id="historymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <img src="img/header.jpg" class="modal-title">
+      </div>
+      <div class="modal-body">
+        <div class="container">
+		<div class="row">
+			<div class="overall-container">
+				<div class="map-container-history">
+					<iframe src="https://maps.google.com/maps?q=29.6779632551104,-95.4769135246223&layer=c&z=17&sll=%3CLatitude%3E,%3CLongitude%3E&cbp=13,276.3,0,0,0&cbll=29.6779632551104,-95.4769135246223&hl=en&ved=0CAoQ2wU&sa=X&output=svembed&layer=c" id="map-canvas-history"></iframe>
+					<button type="button" class="btn btn-primary btn-lg btn-block hcad-button">View Property Information on HCAD</button>
+				</div>
+				<div class="history-container">
+					<H1 class="text-warning"><center>Property History</center></h1>
+					<div id="prop-address"><h3 class="text-warning"><center>1234 Jones Street, Houston, TX 77001</center></h3></div>
+					<div id="subdivision"><h3 class="text-warning"><center>Sun Meadow</center></h3></div>
+					<div id="council-dist"><h3 class="text-warning"><center>District 1</center></h3></div>
+					<h3 class="text-primary">Cases</h3>
+				<div class="panel-group" id="accordion1">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h4 class="panel-title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" id="case-num">
+								1234-5678-9
+							</a></h4>
+						</div>
+						<div id="collapseOne" class="panel-body collapse">
+							<table class="table table-striped">
+								<tr>
+									<td><strong>Project Date</strong></td>
+									<td><strong>Method Received</strong></td>
+									<td><strong>Status</strong></td>
+								</tr>
+								<tr>
+									<td><div id="project-date">May 31,2014</div></td>
+									<td><div id="method-rec">Owner Report</div></td>
+									<td><div id="status">Open</div></td>
+								</tr>
+							</table>
+						<div class="panel-inner">
+
+        <!-- Here we insert another nested accordion -->
+
+				<div class="panel-group" id="accordion2">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h4 class="panel-title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerOne">
+								Violations
+							</a></h4>
+						</div>
+						<div id="collapseInnerOne" class="panel-body collapse">
+							<div class="panel-inner">
+								<table class="table table-striped">
+									<tr>
+										<td><strong>Violation Category</strong></td>
+										<td><strong>Ordinance Violated</strong></td>
+										<td><strong>Ordinance Description</strong></td>
+										<td><strong>Deadline Date</strong></td>
+										<td><strong>Check Back Date</strong></td>
+									</tr>
+									<tr>
+										<td><div id="viol-cat">Ordinance</div></td>
+										<td><div id="ord-viol">Sanitation</div></td>
+										<td><div id="ord-desc">all exterior property and premises shall be maintained in a clean, safe and sanitary condition, free from any accumulation of trash, litter, debris, garbage, waste, rubbish or other similar material. every occupant of a structure shall dispose of all rubbish in a clean and sanitary manner by placing such trash in approved container(s), as provided in chapter 138 of the code of the City of Houston.</div></td>
+										<td><div id="dead-date">June 12,2014</div></td>										
+										<td><div id="check-date">June 14, 2014</div></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4 class="panel-title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerTwo">
+							Actions
+						</a></h4>
+					</div>
+				<div id="collapseInnerTwo" class="panel-body collapse">
+					<div class="panel-inner">
+						<table class="table table-striped">
+									<tr>
+										<td><strong>Action Type</strong></td>
+										<td><strong>Date</strong></td>
+										<td><strong>Action Description</strong></td>
+										<td><strong>Comments</strong></td>
+									</tr>
+									<tr>
+										<td><div id="act-type">Inspection</div></td>
+										<td><div id="act-date">May 31,2014</div></td>
+										<td><div id="act-desc">Inspector checked property for violations</div></td>
+										<td><div id="act-comment">None</div></td>
+									</tr>
+								</table>
+					</div>
+				</div>
+			</div>
+        </div>
+
+        <!-- Inner accordion ends here -->
+
+      </div>
+    </div>
+  </div>
+</div>
+			</div>
+		</div>
+		</div>
+	  </div>
+      </div>
+    </div>
+  </div>
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="footer">
+      <div class="container">
+		<ul class="nav navbar-nav">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="#">311 Help and Info</a></li>
+			<li><a href="#">En Espanol</a></li>
+			<li><a href="#">Contact Us</a></li>
+			<li><a href="#">FAQs</a></li>
+			<li><a href="#">Privacy Policy</a></li>
+			<li><a href="#">Citizens Net</a></li>
+			<li><a href="#">Login</a></li>	
+		  </ul>
+      </div>
+    </div>
+	
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

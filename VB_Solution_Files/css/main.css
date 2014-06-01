@@ -1,0 +1,134 @@
+/* Global Styles
+=============================*/
+html
+{
+	background: #fff;
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	margin-bottom: 100px;
+}
+
+/* Page Styles
+==============================*/
+.header-img {
+	width: 100%
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  /* Negative indent footer by it's height */
+  margin: 0 auto 0;
+  padding: 0 0 0;
+}
+
+.home-panel {
+	margin-top: 20px;
+}
+
+.map-home {
+	width: 100%;
+}
+
+.overall-container {
+	width: 100%;
+}
+
+.map-container {
+	width: 70%;
+	padding-right: 10px;
+}
+
+.map-container-history {
+	width: 70%;
+}
+
+.instructions-container {
+	width: 30%;
+	border: 1px solid #a6a6a6;
+	height: 600px;
+}
+
+.history-container {
+	width: 70%;
+}
+
+#map-canvas 
+{height: 600px;}
+{width: 600px;}
+
+#map-canvas-history {
+height: 300px;
+width: 100%;
+}
+
+
+.search-form {
+	width: 500px !important;
+	text-align: center;
+}
+
+.navbar-form {
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+.modal-title {
+	width: 800px;
+}
+
+.hcad-button {
+	margin-top: 20px;
+	padding: 20px;
+}
+
+.history-panel {
+	margin-right: 20px;
+}
+
+.search-btn {
+	color: #fff;
+}
+
+.start {
+	margin-right: 5px;
+}
+
+.blight-text{
+	margin-bottom:20; 
+	font-size: 30px;
+}
+/* Footer Styles
+=================================*/
+#footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 60px;
+  /* Set the fixed height of the footer here */
+  background-color: #bbd7d8;
+}
+
+/* Media Queries
+====================================*/
+@media(max-width: 768px){
+	#footer {
+		background: none;
+		text-align: center;
+	}
+	
+	.instructions-container {
+		height: auto;
+	}
+}
+
+@media(max-width: 992px){
+	#footer {
+		background: none;
+		text-align: center;
+	}
+}
+
