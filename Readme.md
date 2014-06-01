@@ -5,7 +5,7 @@ Data presented here is solely for information purposes and shall not be consider
 
 ## <a name="why"></a>Why does this matter?
 
-City Councilmembers and citizens regularly ask for information about blighted properties and nuisances. To do so, they have to contact City staff and even what on public records request. Using City of Houston Blighted Properties, we wanted to allow cities and Councilmembers and more proactive way to see what's going on in their neighborhood.
+City Council members and citizens regularly ask for information about blighted properties and nuisances. To do so, they have to contact City staff and even wait on public records requests. Using City of Houston Blighted Properties, we wanted to allow citizens and Council members a more proactive way to see what's going on in their neighborhood.
 
 ## <a name="TeamMembers"></a>Team Members
  - City of Houston 2nd Annual Open Innovation Hackathon Team Members
