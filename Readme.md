@@ -31,7 +31,8 @@ http://www.screencast.com/t/3qKVe3vyPTP
 ## <a name="To-Do"></a>To-Do
 - Enable Googles API address search
 - Work on zoom cluster
-- Provide some additional search and filtering on the main page
+- Provide some additional search and filtering on the main page (Service Request Number, Council District, submission date, etc.)
+- Code documentation and clean-up.
 
 
 Last Updated: June 1, 2014
