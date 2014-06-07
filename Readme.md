@@ -18,10 +18,11 @@ City Council members and citizens regularly ask for information about blighted p
 
 Prototype completed in 18 1/2 hours!
 
-## <a name="Video"> Video
+## <a name="Video"></a>Video
 http://www.screencast.com/t/3qKVe3vyPTP
 
 ## <a name="Technology"></a>Technology Used
+- Created in Visual Studio 2012
 - ASP .Net with C# is used for the server-side programming (serving out JSON data)
 - Microsoft SQL Server
 - HTML, CSS3, Javascript for the client-side scripting, with AJAX to call JSON web services
@@ -29,9 +30,12 @@ http://www.screencast.com/t/3qKVe3vyPTP
 - Data files posted at http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don (All Projects, All Project Level Actions, All Project Inspections, and All Violations) - some additional lat and long scripting was done
 
 ## <a name="To-Do"></a>To-Do
-- Enable Googles API address search
-- Work on zoom cluster
-- Provide some additional search and filtering on the main page
+- Clean up lat and long geocoding - NAD27 State Plane Texas S Central 4204 feet is used in DON Forms system, but the accuracy is not good
+- Provide some additional search and filtering on the main page (Service Request Number, Council District, submission date, etc.)
+- Code documentation and clean-up.
+
+##<a name="Bugs"></a>Possible Bugs
+- When zoomed in at the max level there appears to be a potential for a blue dot to still appear (i.e. point clustering still occurring). Need to verify and figure out how to treat.
 
 
-Last Updated: June 1, 2014
+Last Updated: June 6, 2014

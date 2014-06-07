@@ -130,7 +130,7 @@ Queries.prototype.fail = function (results) {
 /////////////////////////////////////////////////////////////////
 
 Queries.prototype.handleDotOnClick = function (LatLon) {
-    this.queryClusters();
+    //this.queryClusters(); Don't need because listener on zoom change handles
     map.setZoom(map.getZoom() + 1);
     map.panTo(new google.maps.LatLng(LatLon.Lat, LatLon.Lon));
 }
