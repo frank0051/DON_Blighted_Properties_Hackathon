@@ -30,12 +30,9 @@ http://www.screencast.com/t/3qKVe3vyPTP
 - Data files posted at http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don (All Projects, All Project Level Actions, All Project Inspections, and All Violations) - some additional lat and long scripting was done
 
 ## <a name="To-Do"></a>To-Do
-<<<<<<< HEAD
 - Clean up lat and long geocoding - NAD27 State Plane Texas S Central 4204 feet is used in DON Forms system, but the accuracy is not good
-=======
 - Enable Googles API address search
 - Work on zoom cluster
->>>>>>> 5dd9da1c58c0f811be9302eac0f96619625b3842
 - Provide some additional search and filtering on the main page (Service Request Number, Council District, submission date, etc.)
 - Code documentation and clean-up.
 
