@@ -31,8 +31,6 @@ http://www.screencast.com/t/3qKVe3vyPTP
 
 ## <a name="To-Do"></a>To-Do
 - Clean up lat and long geocoding - NAD27 State Plane Texas S Central 4204 feet is used in DON Forms system, but the accuracy is not good
-- Enable Googles API address search
-- Work on zoom cluster
 - Provide some additional search and filtering on the main page (Service Request Number, Council District, submission date, etc.)
 - Code documentation and clean-up.
 
