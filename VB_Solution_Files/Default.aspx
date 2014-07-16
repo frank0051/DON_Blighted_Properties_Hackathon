@@ -21,7 +21,7 @@
     <![endif]-->
 
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
@@ -100,6 +100,7 @@
             //**End Autocomplete listener and zoom
         }
         google.maps.event.addDomListener(window, 'load', initialize);
+        //window.onload = initialize;
         Date.prototype.getShortDate = function () {
             return this.getMonth() +
             "/" + this.getDate() +
@@ -108,7 +109,7 @@
     </script>
 
 </head>
-<body
+<body>
 
     <div id="wrap">
         <img src="img/header.jpg" alt="Header Image" class="header-img">

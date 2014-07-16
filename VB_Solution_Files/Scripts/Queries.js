@@ -179,7 +179,7 @@ Queries.prototype.populateViolations = function (HCAD, results) {
         var tmp = document.getElementById("council-dist");
         tmp.innerHTML = data[0]["Council District"];
         var tmp = document.getElementById("map-canvas-history");
-        tmp.src = "https://maps.google.com/maps?q=" + data[0].Latitude + "," + data[0].Longitude + "&layer=c&z=17&sll=%3CLatitude%3E,%3CLongitude%3E&cbp=13,276.3,0,0,0&cbll=" + data[0].Latitude + "," + data[0].Longitude + "&hl=en&ved=0CAoQ2wU&sa=X&output=svembed&layer=c";
+        tmp.src = "https://maps.google.com/maps?q=" + data[0].Merged_Situs + ", HOUSTON, TX " + data[0].ZipCode + "+(" + parseFloat(data[0].Latitude).toFixed(2) + "," + parseFloat(data[0].Longitude).toFixed(2) + ")@" + data[0].Latitude + "," + data[0].Longitude + "&layer=c&z=17&cbll=" + data[0].Latitude + "," + data[0].Longitude + "&cbp=13,276.3,0,0,0&output=svembed";
         var tmp = document.getElementById("hcad-link");
         tmp.href = "http://www.hcad.org/records/recorddetails.asp?taxyear=2014&acct=" + HCAD;
 
