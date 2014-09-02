@@ -6,12 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Houston Hackathon Blight Status</title>
+    <title>City of Houston Nuisance Tracker</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <%--<link rel="stylesheet" href="css/bootstrap-theme.min.css">--%>
     <link rel="stylesheet" href="css/main.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,95 +24,20 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="Scripts/Queries.js"></script>
+    <script type="text/javascript" src="Scripts/shrink.js"></script>
+    <script type="text/javascript" src="Scripts/initialize.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-    <script type="text/javascript">
-        var map;
-        var queries;
-        function initialize() {
-            var mapOptions = { zoom: 10, center: new google.maps.LatLng(29.762354, -95.365586) };
-            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            queries = new Queries();
-            setTimeout(queries.queryClusters.bind(queries), 500);
-
-            // Create variable for the address search
-            var input = /** @type {HTMLInputElement} */(document.getElementById('pac-input'));
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-            //Pass input variable to autocomplete search and bias autocomplete to map bounds
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            autocomplete.bindTo('bounds', map);
-
-            //Create a marker and infobox variable so the autocomplete has something to fill
-            var infowindow = new google.maps.InfoWindow();
-            var marker = new google.maps.Marker({
-                map: map,
-                anchorPoint: new google.maps.Point(0, -29)
-            });
-
-            //**Add listener for zoom change
-            google.maps.event.addListener(map, 'zoom_changed', function () {
-                queries.queryClusters();
-            });
-            ////**End listener for zoom change
-
-            //**Autocomplete listener and zoom
-            google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                //infowindow.close();
-                marker.setVisible(false);
-                var place = autocomplete.getPlace();
-                if (!place.geometry) {
-                    return;
-                }
-
-                // If the place has a geometry, then present it on a map.
-                if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport);
-                } else {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(15);  // Why 17? Because it looks good.
-                }
-                marker.setIcon(/** @type {google.maps.Icon} */({
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(35, 35)
-                }));
-                marker.setPosition(place.geometry.location);
-                marker.setVisible(true);
-
-                var address = '';
-                if (place.address_components) {
-                    address = [
-                      (place.address_components[0] && place.address_components[0].short_name || ''),
-                      (place.address_components[1] && place.address_components[1].short_name || ''),
-                      (place.address_components[2] && place.address_components[2].short_name || '')
-                    ].join(' ');
-                }
-
-                queries.queryClusters();
-                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-                infowindow.open(map, marker);
-            });
-            //**End Autocomplete listener and zoom
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-        //window.onload = initialize;
-        Date.prototype.getShortDate = function () {
-            return this.getMonth() +
-            "/" + this.getDate() +
-            "/" + this.getFullYear();
-        }
-    </script>
 
 </head>
-<body>
+<body onload="initialize()">
 
     <div id="wrap">
+        <div id="load_image"></div>
         <img src="img/header.jpg" alt="Header Image" class="header-img">
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
@@ -129,14 +55,14 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="#">I want to...</a></li>
-                        <li><a href="#">Government</a></li>
-                        <li><a href="#">Residents</a></li>
-                        <li><a href="#">Business</a></li>
-                        <li><a href="#">Departments</a></li>
-                        <li><a href="#">Visitors</a></li>
-                        <li><a href="#">En Espanol</a></li>
+                        <li class="active"><a href="http://houstontx.gov/">Home</a></li>
+                        <li><a href="http://houstontx.gov/iwantto/">I want to...</a></li>
+                        <li><a href="http://houstontx.gov/residents/">Government</a></li>
+                        <li><a href="http://houstontx.gov/residents/">Residents</a></li>
+                        <li><a href="http://houstontx.gov/business/">Business</a></li>
+                        <li><a href="http://houstontx.gov/departments">Departments</a></li>
+                        <li><a href="http://houstontx.gov/visitors/">Visitors</a></li>
+                        <li><a href="http://houstontx.gov/espanol/">En Espanol</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#myModal" data-toggle="modal" data-target="#myModal">About This Site</a></li>
@@ -146,23 +72,57 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
+        <div class="container-fluid blight-text" style="text-align: center;">City of Houston Nuisance Tracker</div>
+               
+        <div class="container-fluid" style="padding: 0px;">
 
-        <div class="container-fluid">
-            <span class="blight-text">
-                <center>City of Houston Blighted Properties</center>
-            </span>
                 <div class="overall-container">
-                    <div class="map-container pull-left">
+
+                    <div class="map-container pull-right" id="map-container">
                         <input id="pac-input" type="text" class="controls" placeholder="Enter an address to zoom to and hit enter...">
-                        <div id="map-canvas"></div>
+                        <img src="img/right_arrow.png" alt="Show Panel" onclick="sidebarToggle()" title="Show Panel" id="show_panel" class="show_panel">
+                        <div id="map-canvas">
+                        </div>
                     </div>
 
-                    <div class="instructions-container pull-right">
-                        <h4>How to use this site:</h4>
-                        <p>The Department of Neighborhoods Inspections & Public Service (IPS) enforces <a href="https://library.municode.com/HTML/10123/level2/COOR_CH10BUNEPR.html">Chapter 10</a> of the City of Houston Code of Ordinances. Violations under this section include Open and vacant buildings, nuisances on private property, junk motor vehicles, weeded lots, and graffiti.</p>
-                        <p>You use this map to see open code enforcement violations in the City of Houston. You can either use the search bar to center on an address to get started, or you can pan and zoom like you normally would in Google Maps. Once you get down to a propert you want to learn more about, click on the marker to see the property history.</p>
-                    </div>  
-                      
+                    <div class="instructions-container pull-left" id="instructions-container">
+
+                        <!-- create tabs -->
+                        <div style="border-width: 1px 0px 1px; border-style: outset none inset;">
+                            <ul class="nav nav-pills" style="padding: 10px; text-align: center;">
+				                <li id='welcomeTab' class="active"><a onclick="selectWelcome()">Welcome</a></li>
+				                <li id='filtersTab'><a onclick="selectFilters()">Filters</a></li>
+                                <li class="pull-right"><a onclick="sidebarToggle()"><img src="img/left_arrow.png" alt="Hide Panel" title="Hide Panel" height="21"></a></li>
+			                </ul>
+                            
+                        </div>
+
+                        <div id="welcomeContent" style="padding: 10px">
+                            <h4>How to use this site:</h4>
+                            <p>The Department of Neighborhoods Inspections & Public Service (IPS) enforces <a href="https://library.municode.com/HTML/10123/level2/COOR_CH10BUNEPR.html">Chapter 10</a> of the City of Houston Code of Ordinances. Violations under this section include Open and vacant buildings, nuisances on private property, junk motor vehicles, weeded lots, and graffiti.</p>
+                            <p>You use this map to see open code enforcement violations in the City of Houston. You can either use the search bar to center on an address to get started, or you can pan and zoom like you normally would in Google Maps. Once you get down to a propert you want to learn more about, click on the marker to see the property history.</p>
+
+                            <button type="button" class="btn btn-primary" onclick="selectFilters()">Onward to filters!</button>
+                        </div>
+
+                        <div id="filtersContent" style="padding: 10px; display:none;">
+                            <h4>Project Status:</h4>
+                            <label>
+                                <input type="checkbox" value="All" id="all_pstatus" /> All
+                            </label>
+
+                            <br />
+
+                            <h4>311 Service Request Search</h4>
+                            <input type="text" name="SR_Number" placeholder="Service Request ID" />
+
+                            <h4>Council District:</h4>
+                            <label>
+                                <input type="checkbox" value="All" id="all_districts" /> All
+                            </label>
+                        </div>
+                    </div>
+                 
                 </div>
         </div>
     </div>
@@ -225,7 +185,7 @@
      **********************************************   
      -->
 
-    <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -240,7 +200,7 @@
                                 <img src="img/robot-head.png" alt="Open Houston" /></a>
                     </p>
                     <p></p>
-                    <p>The City of Houston Blighted Properties website is an <a href="//ohouston.org" target="_blank">Open Houston</a> project that was conceptualized at a City of Houston sponsored <a href="//houstonhackathon.com" target="_blank">Hackathon</a>.</p>
+                    <p>The City of Houston Nuisance Tracker website is an <a href="//ohouston.org" target="_blank">Open Houston</a> project that was conceptualized at a City of Houston sponsored <a href="//houstonhackathon.com" target="_blank">Hackathon</a>.</p>
                     Data presented here is solely for information purposes and shall not be considered accurate, factual, or complete. Download your copy of the Department of Neighborhoods code enforcement violation files at <a href="http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don" target="_blank">http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don</a></p>
 		
                     <h4>
@@ -257,7 +217,6 @@
             </div>
         </div>
     </div>
-
 
 </body>
 </html>

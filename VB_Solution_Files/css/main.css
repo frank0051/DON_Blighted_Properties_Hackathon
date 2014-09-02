@@ -8,7 +8,14 @@ html
 }
 
 body {
-	margin-bottom: 100px;
+	/*margin-bottom: 100px;*/
+}
+
+.nav-pills > li > a
+{
+    border-color: #428bca;
+    border-width: 1px;
+    border-style: solid;
 }
 
 /* Page Styles
@@ -38,8 +45,8 @@ body {
 }
 
 .map-container {
-	width: 70%;
-	padding-right: 10px;
+	width: 75%;
+
 }
 
 .map-container-history {
@@ -47,9 +54,11 @@ body {
 }
 
 .instructions-container {
-	width: 30%;
-	border: 1px solid #a6a6a6;
-	height: 600px;
+	width: 	25%;
+    height: 100%;
+	font-family: 		arial;
+	font-size: 			15px; 
+	overflow:auto;
 }
 
 .history-container {
@@ -76,6 +85,10 @@ width: 100%;
 	text-align: center;
 }
 
+.dropdown:hover .dropdown-menu {
+    display: block;
+ }
+
 .modal-title {
 	width: 800px;
 }
@@ -100,7 +113,10 @@ width: 100%;
 .blight-text{
 	margin-bottom:20; 
 	font-size: 30px;
+    text-align: center;
 }
+
+
 /* Footer Styles
 =================================*/
 #footer {
@@ -110,6 +126,20 @@ width: 100%;
   height: 60px;
   /* Set the fixed height of the footer here */
   background-color: #bbd7d8;
+}
+
+#load_image {
+    display:				none;
+    position: absolute;
+    z-index:    			1000;
+    left: 25%;
+    top: 35%;
+    height:141px;
+    width:287px;
+
+    background: 			rgba( 255, 255, 255, 0 ) 
+						url('../img/loadingicon2.gif') 
+						no-repeat;
 }
 
 /* Media Queries
@@ -145,6 +175,19 @@ width: 100%;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       }
 
+      #show_panel {
+	        cursor: pointer;
+	        padding:			1px 1px;
+	        border: 			1px solid;
+	        border-color: 			#B0B0B0;
+	        background-color: 		#FFFFFF;
+	        margin: 1px;
+	        border-radius:	5px;
+            display:none;
+            float:left;
+            fit-position:center;
+        }
+
       #pac-input {
         background-color: #fff;
         padding: 0 11px 0 13px;
@@ -166,3 +209,66 @@ width: 100%;
         font-family: Roboto;
       }
 
+/* CSS for the Services Layer */
+.msg_list {
+	margin: 			0px 0px;
+	padding: 			0px 0px;
+	width: 				270px;
+	background-color: 	#FFFFFF;
+}
+.msg_head {
+	padding: 			10px 5px;
+	cursor: 			pointer;
+	position:			relative;
+	background-color:	#37AFE6;
+	margin:				5px 0px;
+	border: 			1px solid #000;
+	border-radius:	5px;
+}
+.msg_body {
+	position:			relative;
+	padding: 			10px 5px;
+	width: 				258px;
+	margin: 			5px 0px;
+	border: 			1px solid #000;
+	border-radius: 		5px;
+	background-color:	#ECE8EC;
+}
+
+#Trans{
+background-color:	#A9F5E1;
+}
+#GovBo{
+background-color:	#BCF5A9;
+}
+#PubSa{
+background-color:	#F7977A;
+}
+#CityServ{
+background-color:	#FFCC66;
+}
+#Heal{
+background-color:	#F49AC2;
+}
+#Edu{
+background-color:	#FFFF99;
+}
+
+#Transportation{
+background-color:	#A9F5E1;
+}
+#Government_Boundaries{
+background-color:	#BCF5A9;
+}
+#Public_Safety{
+background-color:	#F7977A;
+}
+#Public_Facilities{
+background-color:	#FFCC66;
+}
+#Health{
+background-color:	#F49AC2;
+}
+#Education_Arts_Recreation{
+background-color:	#FFFF99;
+}
