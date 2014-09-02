@@ -85,7 +85,7 @@
                         </div>
                     </div>
 
-                    <div class="instructions-container pull-left" id="instructions-container">
+                    <div class="instructions-container pull-left" id="instructions-container" style="width:25%">
 
                         <!-- create tabs -->
                         <div style="border-width: 1px 0px 1px; border-style: outset none inset;">

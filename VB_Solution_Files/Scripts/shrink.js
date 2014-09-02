@@ -1,5 +1,5 @@
 ﻿function sidebarToggle() {
-    if (document.getElementById('instructions-container').style.width=='25%') {
+    if (document.getElementById('instructions-container').style.width == '25%') {
         document.getElementById('instructions-container').style.width = '0%';
         $('#instructions-container').hide();
         document.getElementById('map-container').style.width = '100%';
