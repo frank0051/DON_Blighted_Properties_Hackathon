@@ -158,6 +158,37 @@ function Pin(marker, infoWindow, onMouseOver) {
         google.maps.event.addListener(this.marker, 'mouseover', onMouseOver);
 };
 
+
+/////////////////////////////////////////////////////////////////
+//For populating the status list via the statuses available in the database
+/////////////////////////////////////////////////////////////////
+
+Queries.prototype.queryStatusList = function (HCAD) {
+    AjaxCall(null,"GetHData.asmx/GetStatusList",this.populateStatusList.bind(this), this.fail.bind(this));
+}
+
+Queries.prototype.populateStatusList = function (results) {
+    if (results[0] = "1") {
+        var all_status = JSON.parse(results[1]);
+        var status_container = $('#status_criteria');
+        var status_template = Mustache.compile($.trim($("#status_template").html()));
+
+        $.each(all_status, function (i, g) {
+            status_container.append(status_template({ status: all_status[i].Project_Status }))
+        });
+
+        $('#status_criteria :checkbox').prop('checked', true);
+
+        function handle_status() {
+            $('#all_status').on('click', function (e) {
+                $('#status_criteria :checkbox:gt(0)').prop('checked', $(this).is(':checked'));
+            });
+        }
+
+        handle_status();
+    }
+}
+
 /////////////////////////////////////////////////////////////////
 //Modal stuff
 /////////////////////////////////////////////////////////////////

@@ -25,6 +25,7 @@
 
         //**Add listener for zoom change
         google.maps.event.addListener(map, 'zoom_changed', function () {
+            queries.clearMap();
             queries.queryClusters();
         });
         ////**End listener for zoom change
@@ -54,6 +55,9 @@
             }));
             marker.setPosition(place.geometry.location);
             marker.setVisible(true);
+            queries.clearMap();
+            queries.queryClusters();
+
 
             var address = '';
             if (place.address_components) {
@@ -63,12 +67,37 @@
                     (place.address_components[2] && place.address_components[2].short_name || '')
                 ].join(' ');
             }
-
-            queries.queryClusters();
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindow.open(map, marker);
         });
         //**End Autocomplete listener and zoom
+
+        /***
+        Stream.JS from David Young - Deep in the Code http://deepinthecode.com
+        Using this to populate the Council District and Status checlists
+        ***/
+
+        //Creating the Council District Checklists
+        var all_districts = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
+        var council_container = $('#council_criteria');
+        var council_template = Mustache.compile($.trim($("#council_template").html()));
+
+        $.each(all_districts, function (i, g) {
+            council_container.append(council_template({district: g}))
+        });
+
+        $('#council_criteria :checkbox').prop('checked', true);
+
+        function handle_council() {
+            $('#all_districts').on('click', function (e) {
+                $('#council_criteria :checkbox:gt(0)').prop('checked', $(this).is(':checked'));
+            });
+        }
+        handle_council();
+        
+        //Creating the Status Checklists
+        queries.queryStatusList();
+
     }
     google.maps.event.addDomListener(window, 'load', initialize);
     //window.onload = initialize;

@@ -36,7 +36,7 @@ public class GetHData : System.Web.Services.WebService
         results[0] = "1";
         string connection = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
         Query query = JsonConvert.DeserializeObject<Query>(jsonobj);
-
+        
         SqlConnection conn = new SqlConnection(connection);
         if (query.isEmptyQuery())
             throw new Exception("Empty Query");
@@ -195,6 +195,48 @@ public class GetHData : System.Web.Services.WebService
         catch (SqlException ex) { results[0] = "0"; results[1] = "SQL exception: " + ex.Message; }
         return results;
     }
+
+    [WebMethod]
+    public string[] GetStatusList()
+    {
+        string[] results = new string[2];
+        results[0] = "1";
+        string connection = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
+        SqlConnection conn = new SqlConnection(connection);
+        string sql = "SELECT DISTINCT [Project_Status] FROM " + ProjectsTable + " order by [Project_Status]";
+        try
+        {
+            conn.Open();
+            if (conn.State == System.Data.ConnectionState.Open)
+            {
+                // Execute the command
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                List<Dictionary<string, string>> rows = new List<Dictionary<string, string>>();
+                if (reader.RecordsAffected < 0 && reader.HasRows) // the SELECT statement has returned a record, then it might be an updated record. So we have to check the TimeStamp.
+                {
+                    while (reader.Read())
+                    {
+                        Dictionary<string, string> atts = new Dictionary<string, string>(reader.FieldCount);
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            atts.Add(reader.GetName(i), reader.GetValue(i).ToString());
+                        }
+                        rows.Add(atts);
+                    }
+                }
+                results[1] = JsonConvert.SerializeObject(rows);
+            }
+            else
+            {
+                results[0] = "0";
+                results[1] = "Connection to SQL DB filed.";
+            }
+        }
+        catch (SqlException ex) { results[0] = "0"; results[1] = "SQL exception: " + ex.Message; }
+        return results;
+    }
+
 
 /*    [WebMethod]
         public string[] ReadTestLatLons(string jsonobj)

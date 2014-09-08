@@ -66,8 +66,9 @@ body {
 }
 
 #map-canvas 
-{height: 600px;}
-{width: 600px;}
+{
+    height: 600px;
+}
 
 #map-canvas-history {
 height: 300px;

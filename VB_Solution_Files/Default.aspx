@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head runat="server">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,12 +21,12 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/mustache.js"></script>
     <script type="text/javascript" src="Scripts/Queries.js"></script>
     <script type="text/javascript" src="Scripts/shrink.js"></script>
     <script type="text/javascript" src="Scripts/initialize.js"></script>
@@ -104,25 +104,78 @@
 
                             <button type="button" class="btn btn-primary" onclick="selectFilters()">Onward to filters!</button>
                         </div>
+                        <form runat="server" role="form">
+                            <div id="filtersContent" style="padding: 10px; display:none;" class="panel-group">
+                                <p>Use the collapsible menus below to filter the map. </p>
 
-                        <div id="filtersContent" style="padding: 10px; display:none;">
-                            <h4>Project Status:</h4>
-                            <label>
-                                <input type="checkbox" value="All" id="all_pstatus" /> All
-                            </label>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filtersContent" href="#status_criteria">Project Status</a></h4>
+                                    </div>
+                                    <div id="status_criteria" class="panel-collapse collapse in">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="All" id="all_status" /> All
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <br />
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filtersContent" href="#311_criteria">311 Service Request Search</a></h4>
+                                    </div>
+                                    <div class="form-group panel-collapse collapse" id="311_criteria">
+                                        <input type="text" id="SR_Number" placeholder="Service Request ID" class="form-control" style="margin-top:6px;" />
+                                        <p class="help-block">Enter all or part of the 311 SR number without dashes or spaces.</p>
+                                    </div>
+                                </div>
 
-                            <h4>311 Service Request Search</h4>
-                            <input type="text" name="SR_Number" placeholder="Service Request ID" />
+                                <div class="panel panel-primary">
+                                    <div class="panel panel-heading">
+                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filtersContent" href="#hcad_criteria">HCAD Property Account Number</a></h4>
+                                    </div>
 
-                            <h4>Council District:</h4>
-                            <label>
-                                <input type="checkbox" value="All" id="all_districts" /> All
-                            </label>
-                        </div>
-                    </div>
-                 
+                                    <div class="form-group panel-collapse collapse" id="hcad_criteria">
+                                        <input type="text" id="HCAD_account" placeholder="HCAD Account Number" class="form-control" style="margin-top:6px;" />
+                                        <p class="help-block">Enter all or part of the HCAD acount number without dashes or spaces.</p>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel panel-heading">
+                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filtersContent" href="#council_criteria">Council District</a></h4>
+                                    </div>
+                                    <div id="council_criteria" class="panel-collapse collapse">
+                                        <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="All" id="all_districts" /> All
+                                        </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary center-block" style="margin-top:6px;">Search</button>
+
+                                <script id="council_template" type="text/html">
+                                <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="{{district}}" /> {{district}}
+                                </label>
+                                </div>
+                                </script>
+
+                                <script id="status_template" type="text/html">
+                                <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="{{status}}" /> {{status}}
+                                </label>
+                                </div>
+                                </script>
+
+                            </div>
+                        </form>
+                   </div>
                 </div>
         </div>
     </div>
@@ -201,7 +254,7 @@
                     </p>
                     <p></p>
                     <p>The City of Houston Nuisance Tracker website is an <a href="//ohouston.org" target="_blank">Open Houston</a> project that was conceptualized at a City of Houston sponsored <a href="//houstonhackathon.com" target="_blank">Hackathon</a>.</p>
-                    Data presented here is solely for information purposes and shall not be considered accurate, factual, or complete. Download your copy of the Department of Neighborhoods code enforcement violation files at <a href="http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don" target="_blank">http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don</a></p>
+                    <p>Data presented here is solely for information purposes and shall not be considered accurate, factual, or complete. Download your copy of the Department of Neighborhoods code enforcement violation files at <a href="http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don" target="_blank">http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don</a></p>
 		
                     <h4>
                         <center>City of Houston 2nd Annual Open Innovation Hackathon Team Members<br/>May 31 - June 1, 2014</center>
