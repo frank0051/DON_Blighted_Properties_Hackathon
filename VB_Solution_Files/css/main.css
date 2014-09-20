@@ -56,8 +56,8 @@ body {
 .instructions-container {
 	width: 	25%;
     height: 100%;
-	font-family: 		arial;
-	font-size: 			15px; 
+	font-family: arial;
+	font-size: 15px; 
 	overflow:auto;
 }
 
@@ -66,9 +66,7 @@ body {
 }
 
 #map-canvas 
-{
-    height: 600px;
-}
+{height: 600px;}
 
 #map-canvas-history {
 height: 300px;
@@ -112,9 +110,23 @@ width: 100%;
 }
 
 .blight-text{
-	margin-bottom:20; 
+	margin-bottom: 20px; 
 	font-size: 30px;
     text-align: center;
+}
+
+#welcomeTab,
+#filtersTab {
+	padding: 5px;
+}
+
+#welcomeContent,
+#filtersContent {
+	padding: 10px;
+}
+
+#filtersContent {
+	display: none;
 }
 
 
@@ -153,7 +165,37 @@ width: 100%;
 	
 	.instructions-container {
 		height: auto;
+		width: 100%;
+		text-align: center;
 	}
+	
+	.map-container {
+		width: 100%;
+	}
+	
+	.desktop-only {
+		display: none !important;
+	}
+	
+	.welcome-text {
+		text-align: left;
+	}
+	
+	.center-pills {
+		display: inline-block;
+	}
+
+    /*.collapse.in
+    {
+        position: relative;
+        height: 0;
+        overflow: hidden;
+        -webkit-transition: height 0.35s ease;
+        -moz-transition: height 0.35s ease;
+        -o-transition: height 0.35s ease;
+        transition: height 0.35s ease;
+    }*/
+
 }
 
 @media(max-width: 992px){
@@ -161,6 +203,39 @@ width: 100%;
 		background: none;
 		text-align: center;
 	}
+	
+	.instructions-container {
+		height: auto;
+		width: 100%;
+		text-align: center;
+	}
+	
+	.map-container {
+		width: 100%;
+	}
+	
+	.desktop-only {
+		display: none !important;
+	}
+	
+	.welcome-text {
+		text-align: left;
+	}
+	
+	.center-pills {
+		display: inline-block;
+	}
+    /*
+    .collapse.in
+    {
+        position: relative;
+        height: 0;
+        overflow: hidden;
+        -webkit-transition: height 0.35s ease;
+        -moz-transition: height 0.35s ease;
+        -o-transition: height 0.35s ease;
+        transition: height 0.35s ease;
+    }*/
 }
 
 /* Some Google Maps CSS

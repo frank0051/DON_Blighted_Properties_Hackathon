@@ -37,7 +37,7 @@ function AjaxCall(dataobj, webservicelocation, funcSuccess, funcFail) {
 /////////////////////////////////////////////////////////////////
 ///////////////////////THE QUERY OBJECT//////////////////////////
 /////////////////////////////////////////////////////////////////
-function Query(neLat, neLon, swLat, swLon, HCAD, Status) {
+function Query(neLat, neLon, swLat, swLon, HCAD, status, councilDistrict, srNumber) {
     this.NELat = neLat;
     this.NELon = neLon;
     this.SWLat = swLat;
@@ -45,9 +45,17 @@ function Query(neLat, neLon, swLat, swLon, HCAD, Status) {
     this.HCAD = "";
     if (HCAD)
         this.HCAD = HCAD;
-    this.Status = true;
-    if (Status)
-        this.Status = Status;
+    this.Status = "'OPEN'";
+    if (status)
+        this.Status = status;
+
+    this.CouncilDistrict;
+    if(councilDistrict)
+        this.CouncilDistrict = councilDistrict;
+
+    this.SRNumber;
+    if(srNumber)
+        this.SRNumber = srNumber;
 }
 
 /////////////////////////////////////////////////////////////////
@@ -61,7 +69,7 @@ function Queries() {
 Queries.prototype.queryClusters = function () {
     this.clearMap();
     //var query = new Query(map.getBounds().getNorthEast().lat(), map.getBounds().getNorthEast().lng(), map.getBounds().getSouthWest().lat(), map.getBounds().getSouthWest().lng(), "0121440000061");
-    var query = new Query(map.getBounds().getNorthEast().lat(), map.getBounds().getNorthEast().lng(), map.getBounds().getSouthWest().lat(), map.getBounds().getSouthWest().lng());
+    var query = new Query(map.getBounds().getNorthEast().lat(), map.getBounds().getNorthEast().lng(), map.getBounds().getSouthWest().lat(), map.getBounds().getSouthWest().lng(), filter_hcad, filter_status, filter_council, filter_311);
     AjaxCall(query, "GetHData.asmx/GetRecords", this.success.bind(this), this.fail.bind(this));
 }
 
@@ -177,7 +185,7 @@ Queries.prototype.populateStatusList = function (results) {
             status_container.append(status_template({ status: all_status[i].Project_Status }))
         });
 
-        $('#status_criteria :checkbox').prop('checked', true);
+        $('#status_criteria [type=checkbox][value="OPEN"]').prop('checked', true);
 
         function handle_status() {
             $('#all_status').on('click', function (e) {
@@ -203,12 +211,11 @@ Queries.prototype.populateViolations = function (HCAD, results) {
         div.innerHTML = "";
         var data = JSON.parse(results[1]);
 
-        var tmp = document.getElementById("prop-address");
-        tmp.innerHTML = data[0].Merged_Situs + ", HOUSTON, TX " + data[0].ZipCode;
-        var tmp = document.getElementById("subdivision");
-        tmp.innerHTML = data[0].Subdivision;
-        var tmp = document.getElementById("council-dist");
-        tmp.innerHTML = data[0]["Council District"];
+        document.getElementById("prop-address").innerHTML = data[0].Merged_Situs + ", HOUSTON, TX " + data[0].ZipCode;
+        document.getElementById("subdivision").innerHTML = data[0].Subdivision;
+        document.getElementById("council-dist").innerHTML = data[0]["Council District"];
+        document.getElementById("hcad_number_display").innerHTML = HCAD;
+        document.getElementById("sr_number_display").innerHTML = data[0]["Sr_Request_Num"];
         var tmp = document.getElementById("map-canvas-history");
         tmp.src = "https://maps.google.com/maps?q=" + data[0].Merged_Situs + ", HOUSTON, TX " + data[0].ZipCode + "+(" + parseFloat(data[0].Latitude).toFixed(2) + "," + parseFloat(data[0].Longitude).toFixed(2) + ")@" + data[0].Latitude + "," + data[0].Longitude + "&layer=c&z=17&cbll=" + data[0].Latitude + "," + data[0].Longitude + "&cbp=13,276.3,0,0,0&output=svembed";
         var tmp = document.getElementById("hcad-link");

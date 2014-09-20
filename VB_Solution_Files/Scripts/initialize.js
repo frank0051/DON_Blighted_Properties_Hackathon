@@ -1,9 +1,14 @@
 ﻿
     var map;
     var queries;
+    var filter_council;
+    var filter_311;
+    var filter_hcad;
+    var filter_status;
+
     function initialize() {
 
-        var mapOptions = { zoom: 10, center: new google.maps.LatLng(29.762354, -95.365586) };
+        var mapOptions = { zoom: 10, mapTypeId: google.maps.MapTypeId.HYBRID, center: new google.maps.LatLng(29.762354, -95.365586) };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         queries = new Queries();
         setTimeout(queries.queryClusters.bind(queries), 500);
@@ -98,11 +103,49 @@
         //Creating the Status Checklists
         queries.queryStatusList();
 
+        //Add listener on HCAD text-box so it submits form on Enter
+        $('#HCAD_account').bind('keyup', function (e) {
+            if (e.keyCode === 13) { // 13 is enter key
+                filters_submit();
+            }
+        });
+
+        //Add listener on 311 SR Number text-box so it submits form on Enter
+        $('#SR_Number').bind('keyup', function (e) {
+            if (e.keyCode === 13) { // 13 is enter key
+                filters_submit();
+            }
+        });
+
+
     }
+
+
     google.maps.event.addDomListener(window, 'load', initialize);
     //window.onload = initialize;
     Date.prototype.getShortDate = function () {
         return this.getMonth() +
         "/" + this.getDate() +
         "/" + this.getFullYear();
+    }
+
+    //Get the filter values when a filter is submitted and refresh the map
+    function filters_submit() {
+        filter_311 = document.getElementById('SR_Number').value;
+        filter_hcad = document.getElementById('HCAD_account').value;
+
+        var statusArray = [];
+        $("#status_criteria input:checked").not("#all_status").each(function () {
+            statusArray.push("'"+$(this).val()+"'");
+        });
+        filter_status = statusArray.join(',');
+
+        var councilArray = [];
+        $("#council_criteria input:checked").not("#all_districts").each(function () {
+            councilArray.push("'"+$(this).val()+"'");
+        });
+        filter_council = councilArray.join(',');
+
+        queries.clearMap();
+        queries.queryClusters();
     }

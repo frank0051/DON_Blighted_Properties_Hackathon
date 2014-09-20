@@ -114,7 +114,7 @@ public class GetHData : System.Web.Services.WebService
         SqlConnection conn = new SqlConnection(connection);
         if (query.isEmptyQuery())
             throw new Exception("Empty Query");
-        string sql = "SELECT projects.[NPPRJId], projects.[Merged_Situs], projects.ZipCode, Latitude, Longitude, projects.RecordCreateDate, projects.[Subdivision], projects.[Council District], projects.Received_Method, projects.Project_Status ,Violation_Category,Ordno,ShortDes,DeadLineDate,CheckBackDate FROM projects LEFT JOIN [dbo].[violations] on projects.NPPRJId=violations.NPPRJId WHERE projects.HCAD = '" + query.HCAD + "' ORDER BY RecordCreateDate DESC";
+        string sql = "SELECT projects.[NPPRJId], projects.[Merged_Situs], projects.ZipCode, Latitude, Longitude, projects.RecordCreateDate, projects.[Subdivision], projects.[Council District], projects.Received_Method, projects.[Sr_Request_Num], projects.Project_Status ,Violation_Category,Ordno,ShortDes,DeadLineDate,CheckBackDate FROM projects LEFT JOIN [dbo].[violations] on projects.NPPRJId=violations.NPPRJId WHERE projects.HCAD = '" + query.HCAD + "' ORDER BY RecordCreateDate DESC";
 
         try
         {
@@ -294,7 +294,9 @@ public class GetHData : System.Web.Services.WebService
 public class Query
 {
     public string HCAD { get; set; }
-    public bool Status { get; set; }
+    public string Status { get; set; }
+    public string CouncilDistrict { get; set; }
+    public string SRNumber { get; set; }
     public double NELat { get; set; }
     public double NELon { get; set; }
     public double SWLat { get; set; }
@@ -322,6 +324,8 @@ public class Query
         WhereBounds = this.GetLatLonBounds(Where);
         Where = this.GetHCAD(Where);
         Where = this.GetStatus(Where);
+        Where = this.GetCouncil(Where);
+        Where = this.GetSRNumber(Where);
         queryHasBeenBuilt = true;
         return Where.ToString();
     }
@@ -337,12 +341,25 @@ public class Query
 
     private StringBuilder GetHCAD(StringBuilder where)
     {
-        if (where.Length > 0)
-            where.Append(" AND ");
-        if (this.HCAD != null && this.HCAD != "")
-            where.Append(" HCAD = '" + this.HCAD + "'");
-        else
-            where.Append(" HCAD IS NOT NULL");
+        if (this.HCAD != null && this.HCAD.Trim().Length > 1)
+        {
+            if (where.Length > 0)
+                where.Append(" AND ");
+            where.Append(" HCAD LIKE '" + this.HCAD.Trim() + "'");
+        }
+        /*else
+            where.Append(" HCAD IS NOT NULL");*/ //Commented to improve SQL efficiency
+        return where;
+    }
+
+    private StringBuilder GetSRNumber(StringBuilder where)
+    {
+        if (this.SRNumber != null && this.SRNumber.Trim().Length > 1)
+        {
+            if (where.Length > 0)
+                where.Append(" AND ");
+            where.Append(" [Sr_Request_Num] LIKE '" + this.SRNumber.Trim() + "'");
+        }
         return where;
     }
 
@@ -350,7 +367,24 @@ public class Query
     {
         if (where.Length > 0)
             where.Append(" AND ");
-        where.Append(" Project_Status = '" + (this.Status ? "OPEN" : "CLOSED") + "'");
+        where.Append(" Project_Status IN (" + this.Status + ")");
+        return where;
+    }
+
+    private StringBuilder GetCouncil(StringBuilder where)
+    {
+
+        if (this.CouncilDistrict==null || this.CouncilDistrict.Length <= 1)
+            return where;
+
+        //If call Council Districts are selected, don't append to query to 
+        //conserve SQL processing time and to allow selection of null and dirty data
+        if (this.CouncilDistrict == "'A','B','C','D','E','F','G','H','I','J','K'")
+            return where; 
+
+        if (where.Length > 0)
+            where.Append(" AND ");
+        where.Append(" [Council District] IN (" + this.CouncilDistrict + ")");
         return where;
     }
 }

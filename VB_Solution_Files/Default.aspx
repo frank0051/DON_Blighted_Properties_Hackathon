@@ -78,29 +78,22 @@
 
                 <div class="overall-container">
 
-                    <div class="map-container pull-right" id="map-container">
-                        <input id="pac-input" type="text" class="controls" placeholder="Enter an address to zoom to and hit enter...">
-                        <img src="img/right_arrow.png" alt="Show Panel" onclick="sidebarToggle()" title="Show Panel" id="show_panel" class="show_panel">
-                        <div id="map-canvas">
-                        </div>
-                    </div>
-
-                    <div class="instructions-container pull-left" id="instructions-container" style="width:25%">
+                    <div class="instructions-container pull-left" id="instructions-container">
 
                         <!-- create tabs -->
-                        <div style="border-width: 1px 0px 1px; border-style: outset none inset;">
-                            <ul class="nav nav-pills" style="padding: 10px; text-align: center;">
+                        <div class="text-center" style="border-width: 1px 0px 1px; border-style: outset none inset;">
+                            <ul class="nav nav-pills center-pills">
 				                <li id='welcomeTab' class="active"><a onclick="selectWelcome()">Welcome</a></li>
 				                <li id='filtersTab'><a onclick="selectFilters()">Filters</a></li>
-                                <li class="pull-right"><a onclick="sidebarToggle()"><img src="img/left_arrow.png" alt="Hide Panel" title="Hide Panel" height="21"></a></li>
+                                <li class="pull-right desktop-only"><a onclick="sidebarToggle()"><img src="img/left_arrow.png" alt="Hide Panel" title="Hide Panel" height="21"></a></li>
 			                </ul>
                             
                         </div>
 
                         <div id="welcomeContent" style="padding: 10px">
                             <h4>How to use this site:</h4>
-                            <p>The Department of Neighborhoods Inspections & Public Service (IPS) enforces <a href="https://library.municode.com/HTML/10123/level2/COOR_CH10BUNEPR.html">Chapter 10</a> of the City of Houston Code of Ordinances. Violations under this section include Open and vacant buildings, nuisances on private property, junk motor vehicles, weeded lots, and graffiti.</p>
-                            <p>You use this map to see open code enforcement violations in the City of Houston. You can either use the search bar to center on an address to get started, or you can pan and zoom like you normally would in Google Maps. Once you get down to a propert you want to learn more about, click on the marker to see the property history.</p>
+                            <p class="welcome-text">The Department of Neighborhoods Inspections & Public Service (IPS) enforces <a href="https://library.municode.com/HTML/10123/level2/COOR_CH10BUNEPR.html">Chapter 10</a> of the City of Houston Code of Ordinances. Violations under this section include Open and vacant buildings, nuisances on private property, junk motor vehicles, weeded lots, and graffiti.</p>
+                            <p class="welcome-text">You use this map to see open code enforcement violations in the City of Houston. You can either use the search bar to center on an address to get started, or you can pan and zoom like you normally would in Google Maps. Once you get down to a propert you want to learn more about, click on the marker to see the property history.</p>
 
                             <button type="button" class="btn btn-primary" onclick="selectFilters()">Onward to filters!</button>
                         </div>
@@ -127,7 +120,11 @@
                                     </div>
                                     <div class="form-group panel-collapse collapse" id="311_criteria">
                                         <input type="text" id="SR_Number" placeholder="Service Request ID" class="form-control" style="margin-top:6px;" />
-                                        <p class="help-block">Enter all or part of the 311 SR number without dashes or spaces.</p>
+                                        <p class="help-block">Enter all or part of the 311 SR number. You can use % for wildcard searches.</p>
+                                        <ul class="help-block"><li>For SR numbers prior to November 2011, enter the SR number with a dash after the first two year digits. Ex. 08-00130544.</li>
+                                        <li>For SR numbers from November 2011 forward, drop the leading zero and dash. Ex. 101001311366 instead of 0-101001311366.</li>
+                                        <li>When in doubt, enter % before/after all or part of the SR number. Ex. %101001311366% or %11366%.</li>
+                                        </ul>
                                     </div>
                                 </div>
 
@@ -138,7 +135,7 @@
 
                                     <div class="form-group panel-collapse collapse" id="hcad_criteria">
                                         <input type="text" id="HCAD_account" placeholder="HCAD Account Number" class="form-control" style="margin-top:6px;" />
-                                        <p class="help-block">Enter all or part of the HCAD acount number without dashes or spaces.</p>
+                                        <p class="help-block">Enter all or part of the HCAD acount number without dashes or spaces. You can use % for wildcard searches.</p>
                                     </div>
                                 </div>
 
@@ -155,7 +152,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary center-block" style="margin-top:6px;">Search</button>
+                                <button id="filter-submit" type="button" onclick="filters_submit()" class="btn btn-primary center-block" style="margin-top:6px;">Search</button>
 
                                 <script id="council_template" type="text/html">
                                 <div class="checkbox">
@@ -176,6 +173,14 @@
                             </div>
                         </form>
                    </div>
+                
+                    <div class="map-container pull-right" id="map-container">
+                        <input id="pac-input" type="text" class="controls" placeholder="Enter an address to zoom to and hit enter...">
+                        <img src="img/right_arrow.png" alt="Show Panel" onclick="sidebarToggle()" title="Show Panel" id="show_panel" class="show_panel">
+                        <div id="map-canvas">
+                        </div>
+                    </div>
+                
                 </div>
         </div>
     </div>
@@ -201,13 +206,11 @@
                                     <a id="hcad-link" class="btn btn-primary btn-block hcad-button" href="#" target="_blank">View Property Information on HCAD</a>
                                 </div>
                                 <div class="history-container">
-                                    <h3 class="text-warning">
-                                        <center>Property History</center>
+                                    <h3 class="text-warning text-center">
+                                        Property History
                                     </h3>
                                     <div>
-                                        <h4 class="text-warning">
-                                            <center id="prop-address"></center>
-                                        </h4>
+                                        <h4 class="text-warning text-center" id="prop-address"></h4>
                                     </div>
                                     <table class="table table-striped">
                                         <tr>
@@ -217,7 +220,10 @@
                                             <td id="council-dist"></td>
                                         </tr>
                                         <tr>
-
+                                            <td><strong>HCAD Number</strong></td>
+                                            <td id="hcad_number_display"></td>
+                                            <td><strong>311 SR Number</strong></td>
+                                            <td id="sr_number_display"></td>
                                         </tr>
                                     </table>
 
@@ -246,8 +252,8 @@
                     <img src="img/header.jpg" class="modal-title">
                 </div>
                 <div class="modal-body">
-                    <h3 align="center">About This Site</h3>
-                    <p align="center">
+                    <h3 class="text-center">About This Site</h3>
+                    <p class="text-center">
                         <a href="http://www.houstontx.gov" target="_blank">
                             <img src="img/houstonblackandbwhite.png" alt="City Seal" width="200" height="202" border="0" /></a> <a href="http://ohouston.org" target="_blank">
                                 <img src="img/robot-head.png" alt="Open Houston" /></a>
@@ -256,8 +262,8 @@
                     <p>The City of Houston Nuisance Tracker website is an <a href="//ohouston.org" target="_blank">Open Houston</a> project that was conceptualized at a City of Houston sponsored <a href="//houstonhackathon.com" target="_blank">Hackathon</a>.</p>
                     <p>Data presented here is solely for information purposes and shall not be considered accurate, factual, or complete. Download your copy of the Department of Neighborhoods code enforcement violation files at <a href="http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don" target="_blank">http://data.ohouston.org/dataset/city-of-houston-building-code-enforcement-violations-don</a></p>
 		
-                    <h4>
-                        <center>City of Houston 2nd Annual Open Innovation Hackathon Team Members<br/>May 31 - June 1, 2014</center>
+                    <h4 class="text-center">
+                        City of Houston 2nd Annual Open Innovation Hackathon Team Members<br/>May 31 - June 1, 2014
                     </h4>
                     <ul>
                         <li>Frank Bracco - City of Houston, Texas</li>
