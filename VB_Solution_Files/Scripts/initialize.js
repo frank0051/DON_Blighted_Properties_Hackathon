@@ -1,9 +1,14 @@
 ﻿
     var map;
     var queries;
+    var filter_council;
+    var filter_311;
+    var filter_hcad;
+    var filter_status;
+
     function initialize() {
 
-        var mapOptions = { zoom: 10, center: new google.maps.LatLng(29.762354, -95.365586) };
+        var mapOptions = { zoom: 10, mapTypeId: google.maps.MapTypeId.HYBRID, center: new google.maps.LatLng(29.762354, -95.365586) };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         queries = new Queries();
         setTimeout(queries.queryClusters.bind(queries), 500);
@@ -25,6 +30,7 @@
 
         //**Add listener for zoom change
         google.maps.event.addListener(map, 'zoom_changed', function () {
+            queries.clearMap();
             queries.queryClusters();
         });
         ////**End listener for zoom change
@@ -54,6 +60,9 @@
             }));
             marker.setPosition(place.geometry.location);
             marker.setVisible(true);
+            queries.clearMap();
+            queries.queryClusters();
+
 
             var address = '';
             if (place.address_components) {
@@ -63,17 +72,80 @@
                     (place.address_components[2] && place.address_components[2].short_name || '')
                 ].join(' ');
             }
-
-            queries.queryClusters();
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindow.open(map, marker);
         });
         //**End Autocomplete listener and zoom
+
+        /***
+        Stream.JS from David Young - Deep in the Code http://deepinthecode.com
+        Using this to populate the Council District and Status checlists
+        ***/
+
+        //Creating the Council District Checklists
+        var all_districts = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
+        var council_container = $('#council_criteria');
+        var council_template = Mustache.compile($.trim($("#council_template").html()));
+
+        $.each(all_districts, function (i, g) {
+            council_container.append(council_template({district: g}))
+        });
+
+        $('#council_criteria :checkbox').prop('checked', true);
+
+        function handle_council() {
+            $('#all_districts').on('click', function (e) {
+                $('#council_criteria :checkbox:gt(0)').prop('checked', $(this).is(':checked'));
+            });
+        }
+        handle_council();
+        
+        //Creating the Status Checklists
+        queries.queryStatusList();
+
+        //Add listener on HCAD text-box so it submits form on Enter
+        $('#HCAD_account').bind('keyup', function (e) {
+            if (e.keyCode === 13) { // 13 is enter key
+                filters_submit();
+            }
+        });
+
+        //Add listener on 311 SR Number text-box so it submits form on Enter
+        $('#SR_Number').bind('keyup', function (e) {
+            if (e.keyCode === 13) { // 13 is enter key
+                filters_submit();
+            }
+        });
+
+
     }
+
+
     google.maps.event.addDomListener(window, 'load', initialize);
     //window.onload = initialize;
     Date.prototype.getShortDate = function () {
         return this.getMonth() +
         "/" + this.getDate() +
         "/" + this.getFullYear();
+    }
+
+    //Get the filter values when a filter is submitted and refresh the map
+    function filters_submit() {
+        filter_311 = document.getElementById('SR_Number').value;
+        filter_hcad = document.getElementById('HCAD_account').value;
+
+        var statusArray = [];
+        $("#status_criteria input:checked").not("#all_status").each(function () {
+            statusArray.push("'"+$(this).val()+"'");
+        });
+        filter_status = statusArray.join(',');
+
+        var councilArray = [];
+        $("#council_criteria input:checked").not("#all_districts").each(function () {
+            councilArray.push("'"+$(this).val()+"'");
+        });
+        filter_council = councilArray.join(',');
+
+        queries.clearMap();
+        queries.queryClusters();
     }

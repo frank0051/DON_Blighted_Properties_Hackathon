@@ -21,8 +21,8 @@ function selectWelcome() {
     document.getElementById('welcomeTab').className = 'active';
     $('#filtersContent').hide();
     document.getElementById('filtersTab').className = '';
-    $('#layersContent').hide();
-    document.getElementById('layersTab').className = '';
+    /*$('#layersContent').hide();
+    document.getElementById('layersTab').className = '';*/
 }
 
 //Function to toggle on Locations tab
@@ -31,8 +31,8 @@ function selectFilters() {
     document.getElementById('filtersTab').className = 'active';
     $('#welcomeContent').hide();
     document.getElementById('welcomeTab').className = '';
-    $('#layersContent').hide();
-    document.getElementById('layersTab').className = '';
+    /*$('#layersContent').hide();
+    document.getElementById('layersTab').className = '';*/
 }
 
 //Function to toggle on Locations tab
