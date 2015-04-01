@@ -93,7 +93,8 @@
                         <div id="welcomeContent" style="padding: 10px">
                             <h4>How to use this site:</h4>
                             <p class="welcome-text">The Department of Neighborhoods Inspections & Public Service (IPS) enforces <a href="https://library.municode.com/HTML/10123/level2/COOR_CH10BUNEPR.html">Chapter 10</a> of the City of Houston Code of Ordinances. Violations under this section include Open and vacant buildings, nuisances on private property, junk motor vehicles, weeded lots, and graffiti.</p>
-                            <p class="welcome-text">You use this map to see open code enforcement violations in the City of Houston. You can either use the search bar to center on an address to get started, or you can pan and zoom like you normally would in Google Maps. Once you get down to a propert you want to learn more about, click on the marker to see the property history.</p>
+                            <p class="welcome-text">You use this map to see open code enforcement violations in the City of Houston. You can either use the search bar to center on an address to get started, or you can pan and zoom like you normally would in Google Maps. Once you get down to a property you want to learn more about, click on the marker to see the property history.</p>
+                            <p class="welcome-text">Data for this website is refreshed each weekend.</p>
 
                             <button type="button" class="btn btn-primary" onclick="selectFilters()">Onward to filters!</button>
                         </div>
