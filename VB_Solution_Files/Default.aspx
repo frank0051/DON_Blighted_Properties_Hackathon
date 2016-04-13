@@ -31,7 +31,8 @@
     <script type="text/javascript" src="Scripts/shrink.js"></script>
     <script type="text/javascript" src="Scripts/initialize.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAmXMrijZVCODJZi8dUVTvn-fVq7VvIMD0&libraries=places"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js" type="text/javascript"></script>
 
 </head>
 <body onload="initialize()">
