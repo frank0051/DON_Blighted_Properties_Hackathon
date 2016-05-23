@@ -114,7 +114,7 @@ public class GetHData : System.Web.Services.WebService
         SqlConnection conn = new SqlConnection(connection);
         if (query.isEmptyQuery())
             throw new Exception("Empty Query");
-        string sql = "SELECT projects.[NPPRJId], projects.[Merged_Situs], projects.ZipCode, Latitude, Longitude, projects.RecordCreateDate, projects.[Subdivision], projects.[Council District], projects.Received_Method, projects.[Sr_Request_Num], projects.Project_Status ,Violation_Category,Ordno,ShortDes,DeadLineDate,CheckBackDate FROM projects LEFT JOIN [dbo].[violations] on projects.NPPRJId=violations.NPPRJId WHERE projects.HCAD = '" + query.HCAD + "' ORDER BY RecordCreateDate DESC";
+        string sql = "SELECT projects.[NPPRJId], projects.[Merged_Situs], projects.ZipCode, Latitude, Longitude, projects.RecordCreateDate, projects.[Subdivision], projects.[Council District], projects.Received_Method, projects.[Sr_Request_Num], projects.Project_Status ,Violation_Category,Ordno,ShortDes,DeadLineDate,CheckBackDate FROM projects LEFT JOIN [dbo].[violations] on projects.NPPRJId=violations.NPPRJId WHERE projects.HCAD = '" + query.HCAD + "' ORDER BY Project_Status desc,RecordCreateDate DESC";
 
         try
         {

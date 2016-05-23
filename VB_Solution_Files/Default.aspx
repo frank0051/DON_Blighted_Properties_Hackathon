@@ -32,7 +32,7 @@
     <script type="text/javascript" src="Scripts/initialize.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAmXMrijZVCODJZi8dUVTvn-fVq7VvIMD0&libraries=places"></script>
-    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js" type="text/javascript"></script>
+    <script src="js/markerwithlabel.js" type="text/javascript"></script> <!-- On Github at https://github.com/printercu/google-maps-utility-library-v3-read-only/tree/master/markerwithlabel -->
 
 </head>
 <body onload="initialize()">
@@ -56,24 +56,24 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="http://houstontx.gov/">Home</a></li>
-                        <li><a href="http://houstontx.gov/iwantto/">I want to...</a></li>
-                        <li><a href="http://houstontx.gov/residents/">Government</a></li>
-                        <li><a href="http://houstontx.gov/residents/">Residents</a></li>
-                        <li><a href="http://houstontx.gov/business/">Business</a></li>
-                        <li><a href="http://houstontx.gov/departments">Departments</a></li>
-                        <li><a href="http://houstontx.gov/visitors/">Visitors</a></li>
-                        <li><a href="http://houstontx.gov/espanol/">En Espanol</a></li>
+                        <li class="active"><a href="http://mycity.houstontx.gov/nuisancetracker/">Blight Tracker Home</a></li>
+                        <li><a href="http://www.houstontx.gov/fighthoustonblight/index.html">Fight Houston Blight</a></li>
+                        <li><a href="http://www.houstontx.gov/fighthoustonblight/aboutips.html">About IPS</a></li>
+                        <li><a href="http://www.houstontx.gov/fighthoustonblight/whatisblight.html">What is Blight</a></li>
+                        <li><a href="http://www.houstontx.gov/fighthoustonblight/jointhefight.html">Join the Fight </a></li>
+                        <li><a href="http://www.houstontx.gov/fighthoustonblight/blightmap.html">311 Blight Map</a></li>
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#myModal" data-toggle="modal" data-target="#myModal">About This Site</a></li>
                     </ul>
+
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
         </nav>
-        <div class="container-fluid blight-text" style="text-align: center;">City of Houston Nuisance Tracker</div>
+        <div class="container-fluid blight-text" style="text-align: center;">City of Houston Blight Tracker</div>
                
         <div class="container-fluid" style="padding: 0px;">
 
@@ -103,8 +103,8 @@
                             <div id="filtersContent" style="padding: 10px; display:none;" class="panel-group">
                                 <p>Use the collapsible menus below to filter the map. </p>
 
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
+                                <div class="panel panel-primary grey-border">
+                                    <div class="panel-heading grey">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filtersContent" href="#status_criteria">Project Status</a></h4>
                                     </div>
                                     <div id="status_criteria" class="panel-collapse collapse in">
@@ -116,8 +116,8 @@
                                     </div>
                                 </div>
 
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
+                                <div class="panel panel-primary grey-border">
+                                    <div class="panel-heading grey">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filtersContent" href="#311_criteria">311 Service Request Search</a></h4>
                                     </div>
                                     <div class="form-group panel-collapse collapse" id="311_criteria">
@@ -130,8 +130,8 @@
                                     </div>
                                 </div>
 
-                                <div class="panel panel-primary">
-                                    <div class="panel panel-heading">
+                                <div class="panel panel-primary grey-border">
+                                    <div class="panel panel-heading grey">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filtersContent" href="#hcad_criteria">HCAD Property Account Number</a></h4>
                                     </div>
 
@@ -141,8 +141,8 @@
                                     </div>
                                 </div>
 
-                                <div class="panel panel-primary">
-                                    <div class="panel panel-heading">
+                                <div class="panel panel-primary grey-border">
+                                    <div class="panel panel-heading grey">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filtersContent" href="#council_criteria">Council District</a></h4>
                                     </div>
                                     <div id="council_criteria" class="panel-collapse collapse">
@@ -194,7 +194,7 @@
 
     <div class="modal fade bs-example-modal-lg" id="historymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content"  style="width:100%">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <img src="img/header.jpg" class="modal-title">
@@ -202,12 +202,12 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div class="overall-container">
-                                <div class="map-container-history">
+                            <div class="overall-container" style="text-wrap:none; font-size:12px">
+                                <div id="MapContainerHistoryDiv" class="map-container-history">
                                     <iframe src="https://maps.google.com/maps?q=29.6779632551104,-95.4769135246223&layer=c&z=17&sll=%3CLatitude%3E,%3CLongitude%3E&cbp=13,276.3,0,0,0&cbll=29.6779632551104,-95.4769135246223&hl=en&ved=0CAoQ2wU&sa=X&output=svembed&layer=c" id="map-canvas-history"></iframe>
                                     <a id="hcad-link" class="btn btn-primary btn-block hcad-button" href="#" target="_blank">View Property Information on HCAD</a>
                                 </div>
-                                <div class="history-container">
+                                <div id="HistoryContainerDiv" class="history-container">
                                     <h3 class="text-warning text-center">
                                         Property History
                                     </h3>
@@ -229,7 +229,7 @@
                                         </tr>
                                     </table>
 
-                                    <h3 class="text-primary">Cases</h3>
+                                    <h3 class="text-primary" style="color: #404040;">Cases</h3>
                                     <div class="panel-group" id="accordions"></div>
                                 </div>
                             </div>
@@ -274,6 +274,9 @@
                         <li>Raghuveer Modala - Texas A&M University</li>
                         <li>Elvis Takow - Texas A&M University</li>
                     </ul>
+
+                    Source code is available on <a href="https://github.com/frank0051/DON_Blighted_Properties_Hackathon" target="_blank">Github</a>.
+                    <br>Licensed under <a href="https://github.com/frank0051/DON_Blighted_Properties_Hackathon/blob/master/LICENSE">Mozilla Public License Version 2.0</a>.
                 </div>
             </div>
         </div>

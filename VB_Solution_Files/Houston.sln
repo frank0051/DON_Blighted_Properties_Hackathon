@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Houston", ".", "{8C153022-6B62-49BE-8FCD-B6DAAB5E7625}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Publish", ".", "{8C153022-6B62-49BE-8FCD-B6DAAB5E7625}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/Houston"
@@ -18,7 +18,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Houston", ".", "{8C153022-6
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "64860"
+		VWDPort = "55701"
 	EndProjectSection
 EndProject
 Global

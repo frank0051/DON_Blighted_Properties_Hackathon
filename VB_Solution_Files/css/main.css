@@ -13,10 +13,39 @@ body {
 
 .nav-pills > li > a
 {
-    border-color: #428bca;
+    border-color: #404040;
     border-width: 1px;
     border-style: solid;
+    color: #404040;
 }
+
+/* background color for tabs at top */
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus
+{
+    background-color: #404040;
+    border-color: #404040;
+}
+
+/* Change button colors*/
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #404040 !important;
+    border-color: #404040;
+}
+
+/* Change filter panels colors */
+.grey {
+    background-color: #404040 !important;
+    border-color: #404040 !important;
+}
+
+.grey-border {
+    border-color: #404040 !important;
+}
+
+.center-text{
+    text-align: center;
+}
+
 
 /* Page Styles
 ==============================*/
@@ -53,6 +82,10 @@ body {
 	width: 70%;
 }
 
+.map-container-historyDiv {
+	width: 100%;
+}
+
 .instructions-container {
 	width: 	25%;
     height: 100%;
@@ -63,6 +96,10 @@ body {
 
 .history-container {
 	width: 70%;
+}
+
+.history-containerDiv {
+	width: 100%;
 }
 
 #map-canvas 

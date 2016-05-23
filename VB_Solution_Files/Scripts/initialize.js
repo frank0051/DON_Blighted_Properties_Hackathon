@@ -8,7 +8,7 @@
 
     function initialize() {
 
-        var mapOptions = { zoom: 10, mapTypeId: google.maps.MapTypeId.HYBRID, center: new google.maps.LatLng(29.762354, -95.365586) };
+        var mapOptions = { zoom: 10, mapTypeId: google.maps.MapTypeId.ROADMAP, center: new google.maps.LatLng(29.762354, -95.365586) };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         queries = new Queries();
         setTimeout(queries.queryClusters.bind(queries), 500);
@@ -25,7 +25,8 @@
         var infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
             map: map,
-            anchorPoint: new google.maps.Point(0, -29)
+            anchorPoint: new google.maps.Point(0, -29),
+            labelClass: "center-text" //Add Center to labels
         });
 
         //**Add listener for zoom change
@@ -117,11 +118,24 @@
             }
         });
 
-
+        if (navigator.userAgent.match(/Android/i)
+    || navigator.userAgent.match(/webOS/i)
+    || navigator.userAgent.match(/iPhone/i)
+    || navigator.userAgent.match(/iPad/i)
+    || navigator.userAgent.match(/iPod/i)
+    || navigator.userAgent.match(/BlackBerry/i)
+    || navigator.userAgent.match(/Windows Phone/i)
+    )
+        {
+            document.getElementById("HistoryContainerDiv").className = "history-containerDiv";
+            document.getElementById("MapContainerHistoryDiv").className = "map-container-historyDiv";
+            alert("Best viewed in landscape mode");
+        }
+ 
     }
 
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+   google.maps.event.addDomListener(window, 'load', initialize);
     //window.onload = initialize;
     Date.prototype.getShortDate = function () {
         return this.getMonth() +

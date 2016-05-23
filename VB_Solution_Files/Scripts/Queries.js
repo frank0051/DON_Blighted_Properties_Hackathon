@@ -85,19 +85,20 @@ Queries.prototype.success = function (results) {
                     //icon: "http://kel.tamu.edu/IconGenerator/IconGenerator.aspx?size=" + 20 + "&fill=BB6666&border=EE5555&borderW=2",
                     icon: {
                         path: google.maps.SymbolPath.CIRCLE,
-                        scale: 10,
+                        scale: 8,
                         strokeWeight: 2,
-                        fillColor: '#BB6666',
-                        strokeColor: '#EE5555',
+                        fillColor: '#8D3F3F',
+                        strokeColor: '#692F2F',
                         fillOpacity: 1
                     },
                     map: map,
+                    labelClass: "center-text" //Add Center to labels
                     //title: "ID: " + results[el].id + "\nLat: " + position.lat().toFixed(5) + ", Lon: " + position.lng().toFixed(5),
                 });
                 var infoWindow = this.setInfoWindowContentDiv(data[i], marker.getPosition());
                 this.dots[marker.getPosition().lat().toFixed(5) + "_" + marker.getPosition().lng().toFixed(5)] = new Pin(marker, infoWindow, this.onMouseOverPin.bind(this, marker, infoWindow));
             } else {
-                var size = Math.max(35, parseInt(data[i].Projects.length / 140));
+                var size = Math.min(50,Math.max(15, parseInt(data[i].Projects.length / 80)));
                 var marker = new MarkerWithLabel({
                     position: position,
                     //icon: "http://kel.tamu.edu/IconGenerator/IconGenerator.aspx?size=" + Math.max(35, parseInt(data[i].Projects.length / 100)) + "&fill=6666BB&border=5555EE&borderW=2&text=" + data[i].Projects.length,
@@ -105,21 +106,21 @@ Queries.prototype.success = function (results) {
                     //labelClass: "googleLabel", // the CSS class for the label
                     labelStyle: {
                         width: (size * 1.8) + 'px',
-
                         height: (size / 1.5) + 'px',
                         lineHeight: (size / 1.5) + 'px',
-                        fontSize: (size / 1.5) + 'px'
+                        fontSize: (size / 1.4) + 'px'
                     },
                     labelContent: data[i].Projects.length,
                     icon: {
                         path: google.maps.SymbolPath.CIRCLE,
                         scale: size,
                         strokeWeight: 2,
-                        fillColor: '#6666BB',
-                        strokeColor: '#5555EE',
-                        fillOpacity: 1
+                        fillColor: '#a8a8a8',
+                        strokeColor: '#151515',
+                        fillOpacity: .95
                     },
                     map: map,
+                    labelClass: "center-text", //Add Center to labels
                     //title: "ID: " + results[el].id + "\nLat: " + position.lat().toFixed(5) + ", Lon: " + position.lng().toFixed(5),
                 });
                 google.maps.event.addListener(marker, 'mousedown', this.handleDotOnClick.bind(this, data[i].Centroid));
