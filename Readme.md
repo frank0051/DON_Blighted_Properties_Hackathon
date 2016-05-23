@@ -38,6 +38,6 @@ http://www.screencast.com/t/3qKVe3vyPTP
 - When zoomed in at the max level there appears to be a potential for a blue dot to still appear (i.e. point clustering still occurring). Need to verify and figure out how to treat.
 
 
-Internal Demo: http://10.88.22.80/DON_Blighted_Properties/Publish/default.aspx#
+Visit: http://mycity.houstontx.gov/nuisancetracker/
 
-Last Updated: June 6, 2014
+Last Updated: May 23, 2016
